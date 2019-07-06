@@ -7,8 +7,14 @@
 </head>
 <body>
 <main>
+    <header>
+        <?php
+        include_once "./php/utils/nav.html";
+        ?>
+    </header>
+    
     <form action="./php/server/loginUser.php" method="post">
-    <h1>Login</h1>
+    <h1>Вход</h1>
     <?php 
         session_start();
         if(isset($_SESSION['loginError']) && $_SESSION['loginError']){

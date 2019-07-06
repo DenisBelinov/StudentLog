@@ -7,6 +7,12 @@
 </head>
 <body>
 <main>
+    <header>
+        <?php
+        include_once "./php/utils/nav.html";
+        ?>
+    </header>
+    
     <form action="./php/server/registerUser.php" method="post">
     <h1>Регистрация</h1>
     <?php 

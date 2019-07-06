@@ -22,8 +22,9 @@ class UserHandler{
 
     public function registerUser($username, $firstname, $lastName, $email, $password, $fn, $speciality, $year){
         $stmt = $this->conn->prepare("INSERT INTO users (username, firstName, lastName, email, password, fn, speciality, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-        $stmt->execute([$username, $firstname, $lastName, $email, $password, $fn, $speciality, $year]);
+        
+        $encryptedPassword = md5($password);
+        $stmt->execute([$username, $firstname, $lastName, $email, $encryptedPassword, $fn, $speciality, $year]);
     }
 
     public function verifyUser($username, $password) {
@@ -33,7 +34,7 @@ class UserHandler{
 
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($row['password'] == $password){
+            if ($row['password'] == md5($password)){
                 return true;
             }
         }
@@ -41,7 +42,7 @@ class UserHandler{
     }
 
     public function isUserRegistered($username){
-        $stmt = $this->conn->prepare("SELECT username, password FROM users WHERE username='$username'");
+        $stmt = $this->conn->prepare("SELECT username FROM users WHERE username='$username'");
 
         $stmt->execute();
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Student Logger</title>
+    <title>Document</title>
 </head>
 <body>
     <header>
@@ -12,5 +12,6 @@
         include_once "./php/utils/nav.html";
         ?>
     </header>
+    <h1>You need to LOGIN!</h1>
 </body>
 </html>

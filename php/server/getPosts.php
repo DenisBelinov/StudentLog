@@ -36,6 +36,7 @@ else if(isset($_GET['postCounts'])) {
     http_response_code(200);
     echo json_encode($posts);
 }
+
 else if (isset($_SESSION['loggedUser'])) {
     $user = $_SESSION['loggedUser'];
 

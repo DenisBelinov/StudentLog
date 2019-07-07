@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <script type="text/javascript" src="js/mylog.js"></script>
+    
 </head>
 <body>
     <header>
@@ -14,8 +14,24 @@
         include_once "./php/utils/nav.html";
         ?>
     </header>
+    <section>
+    <form id="filterForm">
+    <p>
+        <label for="typeFilter">Filter by type: </label>
+        <input id="typeFilter" type="text" name="typeFilter" placeholder="e.g. denko">
+    </p>
+    <p>
+        <label for="subjectFilter">Filter by subject</label>
+        <input id="subjectFilter" type="text" name="subjectFilter">
+    </p>
 
-    <section id="myPoststContainer" class="posts-container">
+    <button type="submit" name="filterButton">Филтрирай</button>
+    </form>
+    <button type="button" id="clearButton">Изчисти</button>
     </section>
+    
+    <section id="myPostsContainer" class="posts-container">
+    </section>
+    <script type="text/javascript" src="js/mylog.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@ class PostHandler{
 
     // Getting Posts
     public function getAllPostsFromUser($user){
-        $stmt = $this->conn->prepare("SELECT title, posttypes.name as postType, subjects.name as sybjectType, comment FROM posts
+        $stmt = $this->conn->prepare("SELECT title, posttypes.name as postType, subjects.name as subjectType, comment FROM posts
         INNER JOIN users
         ON posts.userId = users.id
         INNER JOIN posttypes
@@ -52,6 +52,19 @@ class PostHandler{
         INNER JOIN subjects
         ON posts.subjectId = subjects.id
         WHERE users.username='$user'");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPublicPosts(){
+        $stmt = $this->conn->prepare("SELECT title, posttypes.name as postType, subjects.name as subjectType, comment FROM posts
+        INNER JOIN users
+        ON posts.userId = users.id
+        INNER JOIN posttypes
+        ON posts.typeId = posttypes.id
+        INNER JOIN subjects
+        ON posts.subjectId = subjects.id");
 
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

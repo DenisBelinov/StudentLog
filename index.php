@@ -11,6 +11,10 @@
         <?php
         include_once "./php/utils/nav.html";
         ?>
+
+    <section id="myPostsContainer" class="posts-container">
+    </section>
+    <script type="text/javascript" src="js/indexpage.js"></script>
     </header>
 </body>
 </html>

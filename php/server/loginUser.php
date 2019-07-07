@@ -17,6 +17,8 @@ if (isset($_POST) && isset($_POST['loginButton'])) {
         header('Location: ../../login.php');
     }
     else {
+        session_start();
+        $_SESSION['loggedUser'] = $username;
         header('Location: ../../index.php');
     }
 }

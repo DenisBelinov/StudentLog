@@ -20,22 +20,41 @@ class PostHandler{
         $this->database->closeConnection();
     }
 
-    public function addPostWithComment($title, $subject, $type, $comment){
+    // Adding posts
+    public function addPostWithComment($title, $subject, $type, $comment, $user){
         // Expects subject and type to already exist in the database
         // I do not plan to add error handling if they do not exists as of now
 
         $subjectId = $this->getSubjectId($subject);
         $typeId = $this->getTypeId($type);
+        $userId = $this->getUserId($user);
+
         $date = date("Y-m-d H:i:s");
+
         if ($subjectId && $typeId){
-            $stmt = $this->conn->prepare("INSERT INTO posts (title, subjectId, typeId, comment, date) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$title, $subjectId, $typeId, $comment, $date]);
+            $stmt = $this->conn->prepare("INSERT INTO posts (title, subjectId, typeId, comment, date, userId) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$title, $subjectId, $typeId, $comment, $date, $userId]);
         }
     }
 
-    public function addPostWithoutComment($title, $subject, $type){
+    public function addPostWithoutComment($title, $subject, $type, $user){
         $comment = '';
-        $this->addPostWithComment($title, $subject, $type, $comment);
+        $this->addPostWithComment($title, $subject, $type, $comment, $user);
+    }
+
+    // Getting Posts
+    public function getAllPostsFromUser($user){
+        $stmt = $this->conn->prepare("SELECT title, posttypes.name as postType, subjects.name as sybjectType, comment FROM posts
+        INNER JOIN users
+        ON posts.userId = users.id
+        INNER JOIN posttypes
+        ON posts.typeId = posttypes.id
+        INNER JOIN subjects
+        ON posts.subjectId = subjects.id
+        WHERE users.username='$user'");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //UTILS
@@ -60,5 +79,17 @@ class PostHandler{
         }
         return false;
     }
+
+    private function getUserId($name){
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username='$name'");
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $row['id'];
+        }
+        return false;
+    }
+
 }
 ?>

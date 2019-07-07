@@ -1,6 +1,8 @@
 <?php
+require_once '../utils/loginCheck.php';
 require_once '../handlers/PostHandler.php';
 
+$user = $_SESSION['loggedUser'];
 if (isset($_POST) && isset($_POST['newPostButton'])) {
     $title = $_POST['title'];
     $subject = $_POST['subject'];
@@ -11,11 +13,11 @@ if (isset($_POST) && isset($_POST['newPostButton'])) {
 
     if (isset($_POST['comment'])){
         $comment = $_POST['comment'];
-        $postHandler->addPostWithComment($title, $subject, $type, $comment);
+        $postHandler->addPostWithComment($title, $subject, $type, $comment, $user);
         header('Location: ../../afterpost.php');
     }
     else{
-        $postHandler->addPostWithoutComment($title, $subject, $type, $comment);
+        $postHandler->addPostWithoutComment($title, $subject, $type, $comment, $user);
         header('Location: ../../afterpost.php');
     }
 }

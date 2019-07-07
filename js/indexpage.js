@@ -19,7 +19,7 @@ function downloadPosts() {
 }
 
 function refreshPostsHtml(){
-    var container = document.getElementById('myPostsContainer');
+    var container = document.getElementById('myHomePostsContainer');
     var output = '';
 
     for (var i in posts){

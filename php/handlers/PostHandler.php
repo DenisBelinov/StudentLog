@@ -70,6 +70,64 @@ class PostHandler{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getPostCountsByTypeAndSubject($filterType, $filterSubject){        
+        $stmt = $this->conn->prepare("SELECT users.firstName, users.lastName, COUNT(*) as count FROM posts
+        INNER JOIN users
+        ON posts.userId = users.id
+        INNER JOIN posttypes
+        ON posts.typeId = posttypes.id
+        INNER JOIN subjects
+        ON posts.subjectId = subjects.id
+        WHERE posttypes.name = '$filterType' AND subjects.name = '$filterSubject'
+        GROUP BY users.id");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPostCountsByType($filterType){
+        $stmt = $this->conn->prepare("SELECT users.firstName, users.lastName, COUNT(*) as count FROM posts
+        INNER JOIN users
+        ON posts.userId = users.id
+        INNER JOIN posttypes
+        ON posts.typeId = posttypes.id
+        INNER JOIN subjects
+        ON posts.subjectId = subjects.id
+        WHERE posttypes.name = '$filterType'
+        GROUP BY users.id");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPostCountsBySubject($filterSubject){
+        $stmt = $this->conn->prepare("SELECT users.firstName, users.lastName, COUNT(*) as count FROM posts
+        INNER JOIN users
+        ON posts.userId = users.id
+        INNER JOIN posttypes
+        ON posts.typeId = posttypes.id
+        INNER JOIN subjects
+        ON posts.subjectId = subjects.id
+        WHERE subjects.name = '$filterSubject'
+        GROUP BY users.id");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getPostCounts(){
+        // returns user => postCount kind of output 
+        // will return the firstName and lastName of the user
+        $stmt = $this->conn->prepare("SELECT users.id as id, users.firstName as firstName, users.lastName as lastName, COUNT(*) as count FROM posts
+        INNER JOIN users
+        ON posts.userId = users.id
+        GROUP BY id");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
     //UTILS
     private function getSubjectId($name){
         $stmt = $this->conn->prepare("SELECT * FROM subjects WHERE name='$name'");

@@ -19,7 +19,7 @@ if (isset($_POST) && isset($_POST['registerButton'])) {
     }
     else {
         $userHandler->registerUser($username, $firstName, $lastName, $email, $password, $fn, $speciality, $year);
-        header('Location: ../../login.php')
+        header('Location: ../../login.php');
     }
 }
 

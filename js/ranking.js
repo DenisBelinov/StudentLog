@@ -38,12 +38,14 @@ function filterRanking(e){
 }
 function generateTableHtml(){
     var container = document.getElementById('rankingPostsContainer');
-    var output = '<table>' + 
+    var output = '<table class="table">' +
+    '<thread>' +  
     '<tr>' +
-    '<th>Име</th>' +
-    '<th>Фамилия</th>' +
-    '<th>Резултат</th>' +
-    '</tr>';
+    '<th scope="col">Име</th>' +
+    '<th scope="col">Фамилия</th>' +
+    '<th scope="col">Резултат</th>' +
+    '</tr>' +
+    '</thread><tbody>';
     postCounts.sort(compareUsersByPostCount);
     postCounts.reverse();
     for (var i in postCounts){
@@ -55,7 +57,7 @@ function generateTableHtml(){
             '</tr>'
     }
 
-    output += '</table>'
+    output += '</tbody></table>'
     container.innerHTML = output;
 }
 

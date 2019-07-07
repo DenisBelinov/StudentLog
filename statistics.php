@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 </head>
 <body>
@@ -14,10 +16,10 @@
         include_once "./php/utils/nav.html";
         ?>
     </header>
-    <div class="chart-container" style="position: relative; height:40vh; width:40vw">
+    <div class="chart-container" style="position: relative; height:15vh; width:15vw; padding: 100px">
         <canvas id="myChart" width="200" height="200"></canvas>
     </div>
-    <div class="chart-container" style="position: relative; height:40vh; width:40vw">
+    <div class="chart-container" style="position: relative; height:15vh; width:15vw; padding: 100px">
         <canvas id="myChart2" width="200" height="200"></canvas>
     </div>
     <script type="text/javascript" src="./js/statistics.js"></script>

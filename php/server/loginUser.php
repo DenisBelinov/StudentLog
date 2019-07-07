@@ -19,7 +19,7 @@ if (isset($_POST) && isset($_POST['loginButton'])) {
     else {
         session_start();
         $_SESSION['loggedUser'] = $username;
-        header('Location: ../../index.php');
+        header('Location: ../../index-logged.php');
     }
 }
 

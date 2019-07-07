@@ -1,0 +1,35 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900|Raleway:400,700,900&display=swap');
+
+:root {
+    --nav-bg-color: rgb(66, 39, 3);
+    --nav-links-color: white;
+    --nav-links-hovered: rgb(201, 201, 201);
+  }
+
+nav {
+  display: flex;
+  padding: 0.8rem 0.8rem;
+  background-color: var(--nav-bg-color);
+}
+
+nav a {
+  padding-left: 10px;
+  text-decoration: none;
+  color: var(--nav-links-color);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+form.login {
+    overflow: hidden;
+  }
+form.login input {
+    float: right;
+    clear: both;
+  }
+form.login label {
+    margin-right : 10px;
+}
